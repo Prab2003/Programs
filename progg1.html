@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Module</title>
+  <style>
+    .chat-container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .chat-box {
+        height: 300px;
+        overflow-y: scroll;
+        border: 5px dashed #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    input {
+        width: calc(100% - 60px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div> 
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const predefinedQA = {
+            "How are you": "I am good" ,
+            "Are u Gay" : "Yes i m gay"
+        };
+        
+        function sendMessage() {
+            const userMessage = userInput.value.trim();
+            if (userMessage === "") return; // Prevent sending empty messages
+            displayMessage(userMessage);
+            const answer = predefinedQA[userMessage];
+            if (answer) {
+                displayMessage(answer);
+            } else {
+                displayMessage("I don't understand");
+            }
+            userInput.value = "";
+        }
+        
+        function displayMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>
